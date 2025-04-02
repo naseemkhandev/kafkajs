@@ -16,7 +16,7 @@ export const kafka = new Kafka({
     ca: [fs.readFileSync(path.resolve("./public/ca.pem"), "utf-8")],
   },
   sasl: {
-    mechanism: "plain",
+    mechanism: process.env.KAFKA_MECHANISM as any,
     username: process.env.KAFKA_USERNAME,
     password: process.env.KAFKA_PASSWORD,
   },
