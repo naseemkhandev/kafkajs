@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import "dotenv/config";
 import cors from "cors";
+import { connectKafkaProducer } from "./config/kafka.config.js";
 
 const PORT = process.env.PORT || 8080;
 const app: Application = express();
@@ -13,6 +14,11 @@ app.use(express.urlencoded({ extended: false }));
 // * Routes
 app.get("/", (req: Request, res: Response) => {
   return res.send("<h1>Server is Running 🚀</h1>");
+});
+
+// * Kafka Producer
+connectKafkaProducer().catch((error) => {
+  console.error("Error connecting Kafka Producer", error);
 });
 
 app.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
