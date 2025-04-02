@@ -8,7 +8,6 @@ export const produceMessage = async (topic: string, message: string) => {
     });
 
     console.log("Message produced:", result);
-    await producer.disconnect();
   } catch (error) {
     console.error("Error producing message:", error);
     throw new Error("Failed to produce message");
